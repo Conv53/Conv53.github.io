@@ -27,7 +27,7 @@
         header {
             text-align: center;
             padding: 40px 20px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('header-bg.jpg');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg');
             background-size: cover;
             color: white;
             border-radius: 15px;
@@ -73,12 +73,29 @@
             margin-top: 30px;
         }
 
+        .gallery-item {
+            position: relative;
+            text-align: center;
+        }
+
         .gallery img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* ADDED BUBBLY CAPTIONS */
+        .image-caption {
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            padding: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 0 0 10px 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -111,16 +128,25 @@
         <div class="section">
             <h2>WHAT YOU NEED TO KNOW?</h2>
             <div class="response">
-                <p>If you are stepping into ANY pharmacy, you have to brace yourself for science and obviously service. I would have never expected my work at all before stepping intothe  coop, as a grade 11, it feels really odd to be in the workplace, and everyone shoots you a weird look. However, all I have done is to put on a bright smile, treat everyone the way I wish to be treated and really put myself out to enjoy every moment that happens. If I could travel back in time, to tell myself 1 sentence before I started coop, it would always be - you are just a student, mistakes will happen, but it is your responsibility to turn those mistakes into valuable experiences..</p>
+                <p>If you are stepping into ANY pharmacy, you have to brace yourself for science and obviously service. I would have never expected my work at all before stepping intothe  coop, as a grade 11, it feels really odd to be in the workplace, and everyone shoots you a weird look. However, all I have done is to put on a bright smile, treat everyone the way I wish to be treated and really put myself out to enjoy every moment that happens. If I could travel back in time, to tell myself 1 sentence before I started coop, it would always be - you are just a student, mistakes will happen, but it is your responsibility to turn those mistakes into valuable experiences.</p>
             </div>
         </div>
 
         <!-- Image Gallery -->
         <div class="section">
             <div class="gallery">
-                <img src="image1.jpg" alt="Filling a Prescription">
-                <img src="image2.jpg" alt="Monitoring Fridge Temperatures">
-                <img src="image3.jpg" alt="Opening the Safe for CSA Drugs">
+                <div class="gallery-item">
+                    <img src="image1.jpg" alt="Filling a Prescription">
+                    <div class="image-caption">Prescription Precision</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="image2.jpg" alt="Monitoring Fridge Temperatures">
+                    <div class="image-caption">Safety First</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="image3.jpg" alt="Opening the Safe for CSA Drugs">
+                    <div class="image-caption">Controlled Substance Care</div>
+                </div>
             </div>
         </div>
     </div>

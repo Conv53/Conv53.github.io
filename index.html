@@ -4,99 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Humans of Coop Assignment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Comic Neue', cursive;
-            background-color: #f8f9fa;
-            line-height: 1.6;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg');
-            background-size: cover;
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-
-        .coop-title {
-            font-family: Arial, sans-serif;
-            font-size: 3rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .student-info {
-            font-size: 1.3rem;
-        }
-
-        .section {
-            background: white;
-            padding: 30px;
-            margin: 25px 0;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        .response {
-            font-size: 1.2rem;
-            color: #444;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .gallery-item {
-            position: relative;
-            text-align: center;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* ADDED BUBBLY CAPTIONS */
-        .image-caption {
-            font-family: 'Comic Neue', cursive;
-            font-weight: bold;
-            padding: 10px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 0 0 10px 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
+        * {margin:0;padding:0;box-sizing:border-box;}
+        body {font-family:'Comic Neue',cursive;background:#f8f9fa;line-height:1.6;padding:20px;}
+        .container {max-width:800px;margin:0 auto;}
+        header {text-align:center;padding:60px 30px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('background.jpg') center/cover;border-radius:15px;margin-bottom:30px;}
+        .coop-title {font-family:'Rubik Bubbles',cursive;color:#fff;font-size:2.8rem;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin-bottom:15px;}
+        .student-info {color:#fff;font-size:1.3rem;letter-spacing:1px;}
+        .section {background:#fff;padding:30px;margin:25px 0;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
+        h2 {color:#2c3e50;font-size:1.8rem;border-bottom:3px solid #3498db;padding-bottom:10px;margin-bottom:20px;}
+        .response {font-size:1.1rem;color:#444;}
+        .gallery {display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:30px;}
+        .gallery-item {position:relative;border-radius:10px;overflow:hidden;}
+        .gallery img {width:100%;height:200px;object-fit:cover;}
+        .image-caption {position:absolute;bottom:0;width:100%;background:rgba(255,255,255,0.9);padding:10px;font-family:'Comic Neue',cursive;font-weight:700;}
     </style>
 </head>
 <body>
@@ -108,7 +30,6 @@
             </div>
         </header>
 
-        <!-- WHAT Section -->
         <div class="section">
             <h2>WHAT?</h2>
             <div class="response">
@@ -116,7 +37,6 @@
             </div>
         </div>
 
-        <!-- SO WHAT Section -->
         <div class="section">
             <h2>SO WHAT?</h2>
             <div class="response">
@@ -124,7 +44,6 @@
             </div>
         </div>
 
-        <!-- WHAT YOU NEED TO KNOW Section -->
         <div class="section">
             <h2>WHAT YOU NEED TO KNOW?</h2>
             <div class="response">
@@ -132,20 +51,19 @@
             </div>
         </div>
 
-        <!-- Image Gallery -->
         <div class="section">
             <div class="gallery">
                 <div class="gallery-item">
-                    <img src="image1.jpg" alt="Filling a Prescription">
-                    <div class="image-caption">Filling Prescription</div>
+                    <img src="image1.jpg" alt="Filling Prescriptions">
+                    <div class="image-caption">Filling Prescriptions</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="image2.jpg" alt="Monitoring Fridge Temperatures">
-                    <div class="image-caption">Monitoring Fridge</div>
+                    <img src="image2.jpg" alt="Temperature checks">
+                    <div class="image-caption">Temperature Checks</div>
                 </div>
                 <div class="gallery-item">
-                    <img src="image3.jpg" alt="Opening the Safe for CSA Drugs">
-                    <div class="image-caption">Taking Controlled Drugs</div>
+                    <img src="image3.jpg" alt="Managing CSA Drugs">
+                    <div class="image-caption">Managing CSA Drugs</div>
                 </div>
             </div>
         </div>

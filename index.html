@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Schools Memorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background-color: #2c3e50;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .history-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .caption {
+            padding: 1.5rem;
+        }
+
+        h1, h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .content-section {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>Residential Schools Missing Children</h1>
+        <p>Honoring the past, healing the present, and empowering the future.</p>
+    </section>
+
+    <main class="content-section">
+        <section class="history-section">
+            <h2>History, Context, Reconciliation</h2>
+            <p>The history of residential schools in Canada stands as a profoundly painful and dark chapter...</p>
+            <!-- Insert full text content from your first image here -->
+        </section>
+
+        <section class="gallery-section">
+            <h2>Gallery</h2>
+            <p>Visual documentation is a powerful tool in preserving history and fostering understanding.</p>
+            
+            <div class="gallery">
+                <!-- Repeat this block for each image -->
+                <div class="gallery-item">
+                    <img src="[your-image1.jpg]" alt="Historical photo" class="gallery-img">
+                    <div class="caption">
+                        <h3>Image Title</h3>
+                        <p>Description of the image and its historical significance</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="[your-image2.jpg]" alt="Memorial site" class="gallery-img">
+                    <div class="caption">
+                        <h3>Image Title</h3>
+                        <p>Description of the image and its historical significance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

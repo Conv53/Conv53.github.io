@@ -3,70 +3,471 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Humans of Coop Assignment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <title>DNA Discovery Timeline</title>
     <style>
-        * {margin:0;padding:0;box-sizing:border-box;}
-        body {font-family:'Comic Neue',cursive;background:#f8f9fa;line-height:1.6;padding:20px;}
-        .container {max-width:800px;margin:0 auto;}
-        header {text-align:center;padding:60px 30px;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('background.jpg') center/cover;border-radius:15px;margin-bottom:30px;}
-        .coop-title {font-family:Arial,sans-serif;color:#fff;font-size:2.8rem;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin-bottom:15px;}
-        .student-info {color:#fff;font-size:1.3rem;letter-spacing:1px;}
-        .section {background:#fff;padding:30px;margin:25px 0;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
-        h2 {color:#2c3e50;font-size:1.8rem;border-bottom:3px solid #3498db;padding-bottom:10px;margin-bottom:20px;}
-        .response {font-size:1.1rem;color:#444;}
-        .gallery {display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:30px;}
-        .gallery-item {position:relative;border-radius:10px;overflow:hidden;}
-        .gallery img {width:100%;height:200px;object-fit:cover;}
-        .image-caption {position:absolute;bottom:0;width:100%;background:rgba(255,255,255,0.9);padding:10px;font-family:'Comic Neue',cursive;font-weight:700;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #3a7bd5);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3a7bd5, #1a2a6c);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3a7bd5;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-content {
+            width: 40%;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .scientist-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            border: 4px solid #3a7bd5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .scientist-name {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+            font-size: 1.3rem;
+        }
+
+        .achievement {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .modal-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            border: 4px solid #3a7bd5;
+        }
+
+        .modal-name {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #1a2a6c;
+            font-size: 1.8rem;
+        }
+
+        .modal-year {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: #3a7bd5;
+        }
+
+        .modal-achievement {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background-color: #1a2a6c;
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-year {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: 80%;
+                margin-left: 70px !important;
+                margin-right: 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>DNA Discovery Timeline</h1>
+        <p class="subtitle">All key milestones and scientists who unravelled the mysteries of DNA, from its initial discovery to advanced modern gene editing</p>
+    </header>
+
     <div class="container">
-        <header>
-            <h1 class="coop-title">Humans of Coop</h1>
-            <div class="student-info">
-                <p>Name: Kun Dong<br>Teacher: Mr. Chu</p>
-            </div>
-        </header>
-
-        <div class="section">
-            <h2>WHAT?</h2>
-            <div class="response">
-                <p>My co-op at Shoppers has been a blend of routine and human connection. Each shift starts with fridge checks, I log the temperatures to ensure safety—then shifts to filling prescriptions, a task I’ve been doing every single day and I mastered it so I can finish a day’s work early. But the real adventure is the “customer service” side: pushing past my comfort zone to greet customers, even those having rough days. It’s not always easy, but the rush of oxytocin and seeing that your work is recognized and valued makes it worth it. Between regulatory tasks and unpredictable interactions, I’ve learned that growth lives in the balance of structure and spontaneity. What is this journey in 1 sentence? Well, equal parts fridge logs, prescription filling, and tiny moments where you realize your effort matters.</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>SO WHAT?</h2>
-            <div class="response">
-                <p>This placement has taught me a ton about pharmacology and business inventory management, I have learned many industry standards and how to clinically accelerate efficiency to make sure that everyone is happy. Personally, I have grown more resilient and more extroverted, I am able to manage communication with patients that could be stressed, patients that could be in a rush, or patients that’s just having a bad day. I have also came to learn more about my work style, I work the best under a structured demand/protocol, I will be the best worker that does the work fast and accurate, however, this pivots when I am instructed with 3 or more different tasks. Overall, this coop experience has led me to understand pharmacy workflows much better, from small things like promising customer confidentiality, all the way to optimizing pharmacodynamics in storage and filling, everything that we do makes an impact and it ripples into customer trust, blending science into humanity and community work.</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>WHAT YOU NEED TO KNOW?</h2>
-            <div class="response">
-                <p>If you are stepping into ANY pharmacy, you have to brace yourself for science and obviously service. I would have never expected my work at all before stepping intothe  coop, as a grade 11, it feels really odd to be in the workplace, and everyone shoots you a weird look. However, all I have done is to put on a bright smile, treat everyone the way I wish to be treated and really put myself out to enjoy every moment that happens. If I could travel back in time, to tell myself 1 sentence before I started coop, it would always be - you are just a student, mistakes will happen, but it is your responsibility to turn those mistakes into valuable experiences.</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="image1.jpg" alt="Filling Prescriptions">
-                    <div class="image-caption">Filling Prescriptions</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="image2.jpg" alt="Temperature checks">
-                    <div class="image-caption">Temperature Checks</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="image3.jpg" alt="Managing CSA Drugs">
-                    <div class="image-caption">Managing CSA Drugs</div>
-                </div>
-            </div>
+        <div class="timeline" id="timeline">
+            <!-- Timeline items will be inserted here by JavaScript -->
         </div>
     </div>
+
+    <div class="modal" id="scientistModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img src="" alt="Scientist Photo" class="modal-photo" id="modalPhoto">
+            <h2 class="modal-name" id="modalName"></h2>
+            <p class="modal-year" id="modalYear"></p>
+            <p class="modal-achievement" id="modalAchievement"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>DNA Discovery Timeline &copy; 2023</p>
+    </footer>
+
+    <script>
+        // Scientist data
+        const scientists = [
+            {
+                name: "Gregor Mendel",
+                year: "1866",
+                achievement: "Laws of inheritance of traits were published. However, no connection was drawn between his theory and DNA at the time.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Gregor_Mendel_2.jpg/220px-Gregor_Mendel_2.jpg"
+            },
+            {
+                name: "Friedrich Miescher",
+                year: "1869",
+                achievement: "Isolated a substance rich in phosphorus from the nuclei of white blood cells, which he called 'nuclein'.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Friedrich_Miescher.jpg/220px-Friedrich_Miescher.jpg"
+            },
+            {
+                name: "Albrecht Kossel",
+                year: "1880s",
+                achievement: "Identified the 4 nitrogenous bases in DNA (Adenine, Cytosine, Thymine and Guanine).",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Albrecht_Kossel.jpg/220px-Albrecht_Kossel.jpg"
+            },
+            {
+                name: "Walther Flemming",
+                year: "1882",
+                achievement: "Found thread-like structures in the cell nucleus, he called them chromatins. He also described cell division as mitosis, though he didn't explain how inheritance works.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Walther_Flemming.jpg/220px-Walther_Flemming.jpg"
+            },
+            {
+                name: "Archibald Garrod",
+                year: "1902",
+                achievement: "He found the link between genes and inherited metabolic diseases, with this, he suggested that genes dictate how enzymes work.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Archibald_Garrod.jpg/220px-Archibald_Garrod.jpg"
+            },
+            {
+                name: "Walter Sutton & Theodor Boveri",
+                year: "1902-1903",
+                achievement: "Independently proposed the idea that chromosomes carried Mendelian genes. Now referred to as the Sutton-Boveri Chromosome Theory.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Walter_Sutton.jpg/220px-Walter_Sutton.jpg"
+            },
+            {
+                name: "Thomas Hunt Morgan",
+                year: "1910",
+                achievement: "Using fruit flies, he proved the chromosome theory.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Thomas_Hunt_Morgan.jpg/220px-Thomas_Hunt_Morgan.jpg"
+            },
+            {
+                name: "Frederick Griffith",
+                year: "1928",
+                achievement: "Discovered 'transforming principle', basically something molecular was carrying the genetic materials.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Frederick_Griffith.jpg/220px-Frederick_Griffith.jpg"
+            },
+            {
+                name: "Phoebus Levene",
+                year: "1930s",
+                achievement: "He identified the sugar and phosphate group, and he proposed that DNA is a simple, repeating polymer, which caused many people to think that protein is the genetic material because it is more complex.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Phoebus_Levene.jpg/220px-Phoebus_Levene.jpg"
+            },
+            {
+                name: "George Beadle & Edward Tatum",
+                year: "1941",
+                achievement: "Using the bread mold Neurospora, they propose 'one gene-one enzyme' hypothesis.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/George_Beadle.jpg/220px-George_Beadle.jpg"
+            },
+            {
+                name: "Oswald Avery",
+                year: "1944",
+                achievement: "Proved that Griffith was right and DNA was indeed the genetic material; this was the first strong finding that DNA is the molecule of heredity.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Oswald_Avery_1877-1955.jpg/220px-Oswald_Avery_1877-1955.jpg"
+            },
+            {
+                name: "Erwin Chargaff",
+                year: "1950",
+                achievement: "Analyzed DNA from many species, creating Chargaff's Rules (%A=%T %C=%G)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Erwin_Chargaff_crop.jpg/220px-Erwin_Chargaff_crop.jpg"
+            },
+            {
+                name: "Linus Pauling",
+                year: "1951",
+                achievement: "Discovers the alpha helix structure of proteins. (He also proposed a false DNA model.)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Linus_Pauling.jpg/220px-Linus_Pauling.jpg"
+            },
+            {
+                name: "Alfred Hershey & Martha Chase",
+                year: "1952",
+                achievement: "Using a bacteriophage and phosphorus-32 and sulphur-35, they proved that viral DNA directs the replication of new viruses.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Alfred_Hershey.jpg/220px-Alfred_Hershey.jpg"
+            },
+            {
+                name: "Rosalind Franklin",
+                year: "1952",
+                achievement: "Using X-ray Diffraction, she took a picture of the DNA fibres, serving as great evidence to the helical shape.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Rosalind_Franklin.jpg/220px-Rosalind_Franklin.jpg"
+            },
+            {
+                name: "James Watson & Francis Crick",
+                year: "1953",
+                achievement: "Using Chargaff's rules (base pairing) and Franklin's picture, created the true structure of DNA.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Watson_and_Crick.jpg/220px-Watson_and_Crick.jpg"
+            },
+            {
+                name: "Matthew Meselson & Franklin Stahl",
+                year: "1958",
+                achievement: "Confirming the semi-conservative replication method of DNA (originally predicted by Watson and Crick)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Matthew_Meselson.jpg/220px-Matthew_Meselson.jpg"
+            },
+            {
+                name: "Francis Crick",
+                year: "1958",
+                achievement: "Proposing the Central Dogma of Biology (DNA to RNA to Proteins)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Francis_Crick.png/220px-Francis_Crick.png"
+            },
+            {
+                name: "François Jacob & Jacques Monod",
+                year: "1961",
+                achievement: "Proposed the operon model of gene regulation.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Fran%C3%A7ois_Jacob.jpg/220px-Fran%C3%A7ois_Jacob.jpg"
+            },
+            {
+                name: "Sydney Brenner, François Jacob, Jacques Monod",
+                year: "1961",
+                achievement: "Discovered the messenger RNA (usually referred to as mRNA.)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sydney_Brenner_2009.jpg/220px-Sydney_Brenner_2009.jpg"
+            },
+            {
+                name: "Marshall Nirenberg",
+                year: "1961-1966",
+                achievement: "Cracking the genetic code, determining which triplets correspond to which amino acids.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Marshall_Nirenberg_%281965%29.jpg/220px-Marshall_Nirenberg_%281965%29.jpg"
+            },
+            {
+                name: "Reiji Okazaki & Tsuneko Okazaki",
+                year: "1968",
+                achievement: "Provide evidence for the Okazaki fragments of the lagging strand in DNA replication.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Reiji_Okazaki.jpg/220px-Reiji_Okazaki.jpg"
+            },
+            {
+                name: "Frederick Sanger",
+                year: "1977",
+                achievement: "Develops the 'dideoxy' method for sequencing DNA",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Frederick_Sanger2.jpg/220px-Frederick_Sanger2.jpg"
+            },
+            {
+                name: "Walter Gilbert",
+                year: "1977",
+                achievement: "Develops a chemical sequencing method. (Shared a Nobel Prize with Sanger in 1980.)",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Walter_Gilbert_%281982%29.jpg/220px-Walter_Gilbert_%281982%29.jpg"
+            },
+            {
+                name: "Kary Mullis",
+                year: "1983",
+                achievement: "Invents the Polymerase Chain Reaction, used to amplify small amounts of DNA.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Kary_Mullis.jpg/220px-Kary_Mullis.jpg"
+            },
+            {
+                name: "Human Genome Project",
+                year: "1990-2003",
+                achievement: "An international worldwide collaborative effort to sequence the entire human genome.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/DNA_icon.svg/220px-DNA_icon.svg.png"
+            },
+            {
+                name: "Emmanuelle Charpentier & Jennifer Doudna",
+                year: "2012",
+                achievement: "CRISPR-Cas 9 system as a powerful gene editing tool.",
+                photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Emmanuelle_Charpentier_%2835277223515%29.jpg/220px-Emmanuelle_Charpentier_%2835277223515%29.jpg"
+            }
+        ];
+
+        // Create timeline items
+        const timeline = document.getElementById('timeline');
+        
+        scientists.forEach((scientist, index) => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            
+            timelineItem.innerHTML = `
+                <div class="timeline-year">${scientist.year}</div>
+                <div class="timeline-content" data-index="${index}">
+                    <img src="${scientist.photo}" alt="${scientist.name}" class="scientist-photo">
+                    <h3 class="scientist-name">${scientist.name}</h3>
+                    <p class="achievement">${scientist.achievement.substring(0, 100)}...</p>
+                </div>
+            `;
+            
+            timeline.appendChild(timelineItem);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('scientistModal');
+        const modalPhoto = document.getElementById('modalPhoto');
+        const modalName = document.getElementById('modalName');
+        const modalYear = document.getElementById('modalYear');
+        const modalAchievement = document.getElementById('modalAchievement');
+        const closeModal = document.getElementById('closeModal');
+
+        // Add click event to timeline items
+        document.querySelectorAll('.timeline-content').forEach(item => {
+            item.addEventListener('click', () => {
+                const index = item.getAttribute('data-index');
+                const scientist = scientists[index];
+                
+                modalPhoto.src = scientist.photo;
+                modalPhoto.alt = scientist.name;
+                modalName.textContent = scientist.name;
+                modalYear.textContent = scientist.year;
+                modalAchievement.textContent = scientist.achievement;
+                
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Close modal when clicking X
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside content
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
